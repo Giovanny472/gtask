@@ -1,9 +1,9 @@
 package task
 
 type Tasker interface {
-	GetId() int
-	GetName() string
-	GetProgress() int
+	GetId(idx int) int
+	GetName(idx int) string
+	GetProgress(idx int) int
 }
 
 type Task struct {
@@ -24,4 +24,10 @@ func (task *Task) GetName() string {
 
 func (task *Task) GetProgress() int {
 	return task.progress
+}
+
+func (task *Task) Init(idtask int, nametask string, progressname int) {
+	task.id = idtask
+	task.name = nametask
+	task.progress = progressname
 }
