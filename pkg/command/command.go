@@ -1,4 +1,4 @@
-package task
+package command
 
 // набор комманд
 
@@ -17,8 +17,8 @@ type TypeCommand string
 
 const (
 	Create TypeCommand = "add"
-	Update             = "u"
-	Delete             = "d"
-	Read               = "r"
-	List               = "l"
+	Update TypeCommand = "u"
+	Delete TypeCommand = "d"
+	Read   TypeCommand = "r"
+	List   TypeCommand = "l"
 )

@@ -8,21 +8,17 @@ type ManagerTask interface {
 }
 
 type Manager struct {
-	ListTask
+	listTask ListTask
 }
 
 func (mang *Manager) Create() {
-
 }
 
 func (mang *Manager) Read() {
-
 }
 
 func (mang *Manager) Update() {
-
 }
 
 func (mang *Manager) Delete() {
-
 }
