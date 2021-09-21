@@ -1,7 +1,5 @@
 package command
 
-import "flag"
-
 // набор комманд
 
 // Интерфейс
@@ -12,9 +10,13 @@ type Commander interface {
 
 // Реализация  интерфейса
 type Command struct {
-	Name  TypeCommand
-	Value string
+	Name        TypeCommand `json:name`
+	Instruction string      `json:instruction`
+	ValueUsr    string      `json:valueusr`
+	Description string      `json:description`
 }
+
+type ListCommand []Command
 
 // Cписок комманд
 type TypeCommand string
@@ -28,7 +30,7 @@ const (
 )
 
 func (comm *Command) Config() {
-	flag.StringVar(&comm.Value, string(comm.Name), "", "")
+	//flag.StringVar(&comm.Value, string(comm.Name), "", "")
 }
 
 func (comm *Command) Parse() {
