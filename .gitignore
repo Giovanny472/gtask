@@ -1,0 +1,13 @@
+# Binaries and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Testing
+*.test
+*.tmp
+
+# каталоги
+/bin/

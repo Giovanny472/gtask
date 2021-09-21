@@ -1,9 +1,13 @@
 package command
 
+import "flag"
+
 // набор комманд
 
 // Интерфейс
 type Commander interface {
+	Config()
+	Parse()
 }
 
 // Реализация  интерфейса
@@ -22,3 +26,11 @@ const (
 	Read   TypeCommand = "r"
 	List   TypeCommand = "l"
 )
+
+func (comm *Command) Config() {
+	flag.StringVar(&comm.Value, string(comm.Name), "", "")
+}
+
+func (comm *Command) Parse() {
+
+}
