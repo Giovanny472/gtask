@@ -1,9 +1,10 @@
 package main
 
-import "github.com/Giovanny472/gtask/internal/app"
+import "github.com/Giovanny472/gtask/application"
 
 func main() {
 
-	appTask app.AppTask;
-	appTask.Start();
+	// старт апп
+	aTask application.AppTask
+	aTask.Start()
 }
