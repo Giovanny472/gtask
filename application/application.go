@@ -1,6 +1,9 @@
 package application
 
 import (
+	"log"
+
+	"github.com/Giovanny472/gtask/model"
 	"github.com/Giovanny472/gtask/pkg/config"
 )
 
@@ -11,7 +14,8 @@ type AppTasker interface {
 
 // управление апп
 type AppTask struct {
-	configApp config.Configurator
+	configApp   config.Configurator
+	listCommand model.ListCommand
 }
 
 func (appTask *AppTask) init() {
@@ -23,7 +27,10 @@ func (appTask *AppTask) init() {
 func (appTask *AppTask) Config() {
 
 	// загрузка настроек апп
-	appTask.configApp.Load(config.FileName, OBJECT_JSON)
+	err := appTask.configApp.Load(config.FileName, appTask.listCommand)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func (appTask *AppTask) Start() {

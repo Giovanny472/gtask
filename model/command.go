@@ -27,12 +27,16 @@ type ListCommand []Command
 type TypeCommand string
 
 const (
-	Create TypeCommand = "add"
+	Create TypeCommand = "a"
 	Update TypeCommand = "u"
 	Delete TypeCommand = "d"
 	Read   TypeCommand = "r"
 	List   TypeCommand = "l"
 )
+
+func NewListCommand() *ListCommand {
+	return &ListCommand{}
+}
 
 func (listcom ListCommand) Config() {
 

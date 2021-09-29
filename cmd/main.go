@@ -12,4 +12,5 @@ func main() {
 
 	// старт апп
 	aTaskApp.Start()
+
 }
