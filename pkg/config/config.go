@@ -7,19 +7,19 @@ import (
 	"path/filepath"
 )
 
-type ManagerJson interface {
+type Configurator interface {
 	Load(namefile string, object interface{}) error
-	Save()
+	Save(namefile string, object interface{}) error
 }
 
-type ManJson struct {
+type ConfigApp struct {
 }
 
 // загрузка данных json из определенного файла
-func (manJson *ManJson) Load(namefile string, object interface{}) error {
+func (configapp *ConfigApp) Load(namefile string, object interface{}) error {
 
 	// путь + файл
-	fullNameFile, err := manJson.getPathFile(namefile)
+	fullNameFile, err := configapp.getPathFile(namefile)
 	if err != nil {
 		return err
 	}
@@ -39,10 +39,10 @@ func (manJson *ManJson) Load(namefile string, object interface{}) error {
 }
 
 // сохранение данных json из определенного файла
-func (manJson *ManJson) Save(namefile string, object interface{}) error {
+func (configapp *ConfigApp) Save(namefile string, object interface{}) error {
 
 	// путь + файл
-	fullNameFile, err := manJson.getPathFile(namefile)
+	fullNameFile, err := configapp.getPathFile(namefile)
 	if err != nil {
 		return err
 	}
@@ -54,7 +54,7 @@ func (manJson *ManJson) Save(namefile string, object interface{}) error {
 	return ioutil.WriteFile(fullNameFile, jsonbyte, 0644)
 }
 
-func (manJson *ManJson) getPathFile(namefile string) (string, error) {
+func (configapp *ConfigApp) getPathFile(namefile string) (string, error) {
 
 	app, err := os.Executable()
 	if err != nil {
@@ -62,4 +62,8 @@ func (manJson *ManJson) getPathFile(namefile string) (string, error) {
 	}
 	pathfile := filepath.Dir(app) + namefile
 	return pathfile, err
+}
+
+func New() Configurator {
+	return &ConfigApp{}
 }
