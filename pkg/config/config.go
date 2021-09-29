@@ -16,7 +16,7 @@ type ManJson struct {
 }
 
 // загрузка данных json из определенного файла
-func (manJson *ManJson) Loadjson(namefile string, object interface{}) error {
+func (manJson *ManJson) Load(namefile string, object interface{}) error {
 
 	// путь + файл
 	fullNameFile, err := manJson.getPathFile(namefile)
@@ -35,9 +35,7 @@ func (manJson *ManJson) Loadjson(namefile string, object interface{}) error {
 	jsonByte, _ := ioutil.ReadAll(jsonFile)
 
 	// загружаем данных в object
-	json.Unmarshal(jsonByte, &object)
-
-	return nil
+	return json.Unmarshal(jsonByte, &object)
 }
 
 // сохранение данных json из определенного файла
@@ -49,20 +47,11 @@ func (manJson *ManJson) Save(namefile string, object interface{}) error {
 		return err
 	}
 
-	// читаем файл
-	jsonFile, err := os.Open(fullNameFile)
-	if err != nil {
-		return err
-	}
-	defer jsonFile.Close()
+	// загружаем данные json
+	jsonbyte, _ := json.MarshalIndent(object, "", " ")
 
-	// файл -> []byte
-	jsonByte, _ := ioutil.ReadAll(jsonFile)
-
-	// загружаем данных в object
-	json.Unmarshal(jsonByte, &object)
-
-	return nil
+	// сохраняем данные
+	return ioutil.WriteFile(fullNameFile, jsonbyte, 0644)
 }
 
 func (manJson *ManJson) getPathFile(namefile string) (string, error) {
