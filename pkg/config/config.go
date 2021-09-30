@@ -60,7 +60,7 @@ func (configapp *ConfigApp) getPathFile(namefile string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	pathfile := filepath.Dir(app) + namefile
+	pathfile := filepath.Dir(app) + FolderData + namefile
 	return pathfile, err
 }
 

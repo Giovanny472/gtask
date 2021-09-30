@@ -18,30 +18,37 @@ type AppTask struct {
 	listCommand model.ListCommand
 }
 
-func (appTask *AppTask) init() {
+var apptask *AppTask
+
+func (aptask *AppTask) init() {
 
 	// создание экземпляр настроек
-	appTask.configApp = config.New()
+	aptask.configApp = config.New()
 }
 
-func (appTask *AppTask) Config() {
+func (aptask *AppTask) Config() {
 
 	// загрузка настроек апп
-	err := appTask.configApp.Load(config.FileName, appTask.listCommand)
+	err := aptask.configApp.Load(config.FileName, &aptask.listCommand)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func (appTask *AppTask) Start() {
+func (aptask *AppTask) Start() {
 
 }
 
 func New() AppTasker {
 
-	// создание экземпляр AppTask
-	appTask := &AppTask{}
-	appTask.init()
+	if apptask == nil {
 
-	return appTask
+		// создание экземпляр AppTask
+		apptask = &AppTask{}
+
+		// инициализация
+		apptask.init()
+	}
+
+	return apptask
 }
