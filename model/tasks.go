@@ -1,4 +1,4 @@
-package task
+package model
 
 type Tasker interface {
 	GetId(idx int) int

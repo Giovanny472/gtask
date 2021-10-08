@@ -8,3 +8,7 @@
 # Testing
 *.test
 *.tmp
+
+# каталоги 
+/bin/
+

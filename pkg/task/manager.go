@@ -1,5 +1,7 @@
 package task
 
+import "github.com/Giovanny472/gtask/model"
+
 type ManagerTask interface {
 	Create()
 	Read()
@@ -8,7 +10,7 @@ type ManagerTask interface {
 }
 
 type Manager struct {
-	listTask ListTask
+	listTask model.ListTask
 }
 
 func (mang *Manager) Create() {

@@ -1,5 +1,5 @@
 build-gtask:
-	@go build -o bin\gtask.exe .\cmd\main.go
+	@go build -o cmd\gtask.exe .\cmd\main.go
 
 run-gtask: build-gtask
-	@ .\bin\gtask.exe 
+	@ .\cmd\gtask.exe 

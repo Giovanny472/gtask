@@ -33,6 +33,7 @@ func (aptask *AppTask) Config() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 func (aptask *AppTask) Start() {
