@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type Configurator interface {
@@ -13,6 +14,10 @@ type Configurator interface {
 }
 
 type ConfigApp struct {
+}
+
+func New() Configurator {
+	return &ConfigApp{}
 }
 
 // загрузка данных json из определенного файла
@@ -60,10 +65,9 @@ func (configapp *ConfigApp) getPathFile(namefile string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	pathfile := filepath.Dir(app) + FolderData + namefile
-	return pathfile, err
-}
 
-func New() Configurator {
-	return &ConfigApp{}
+	appPathData := strings.Replace(app, FolderBin, FolderData, 1)
+	pathDataFile := filepath.Dir(appPathData) + FolderSeparator + namefile
+
+	return pathDataFile, nil
 }
