@@ -1,33 +1,32 @@
 package model
 
 type Tasker interface {
-	GetId(idx int) int
-	GetName(idx int) string
-	GetProgress(idx int) int
+	Name() string
+	Progress() int
 }
 
+type ListTask []Tasker
+
 type Task struct {
-	id       int
 	name     string
 	progress int
 }
 
-type ListTask []*Task
+// ***** TASK *****
+func New(idtask int, nametask string, progressname int) Tasker {
 
-func (task *Task) GetId() int {
-	return task.id
+	var aTask Task
+
+	aTask.name = nametask
+	aTask.progress = progressname
+
+	return &aTask
 }
 
-func (task *Task) GetName() string {
+func (task *Task) Name() string {
 	return task.name
 }
 
-func (task *Task) GetProgress() int {
+func (task *Task) Progress() int {
 	return task.progress
-}
-
-func (task *Task) Init(idtask int, nametask string, progressname int) {
-	task.id = idtask
-	task.name = nametask
-	task.progress = progressname
 }

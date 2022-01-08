@@ -41,9 +41,10 @@ func NewListCommand() *ListCommand {
 func (listcom ListCommand) Config() {
 
 	for comm := range listcom {
-		fmt.Printf("comm: %v\n", comm)
 
+		fmt.Printf("comm: %v\n", comm)
 		//flag.StringVar(&comm.ValueUsr, comm.Instruction, comm.ValueDefault, comm.Description)
+
 	}
 
 }

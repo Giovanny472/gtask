@@ -1,6 +1,7 @@
 package application
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/Giovanny472/gtask/model"
@@ -20,26 +21,6 @@ type AppTask struct {
 
 var apptask *AppTask
 
-func (aptask *AppTask) init() {
-
-	// создание экземпляр настроек
-	aptask.configApp = config.New()
-}
-
-func (aptask *AppTask) Config() {
-
-	// загрузка настроек апп
-	err := aptask.configApp.Load(config.FileName, &aptask.listCommand)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-}
-
-func (aptask *AppTask) Start() {
-
-}
-
 func New() AppTasker {
 
 	if apptask == nil {
@@ -52,4 +33,28 @@ func New() AppTasker {
 	}
 
 	return apptask
+}
+
+func (aptask *AppTask) init() {
+
+	// создание экземпляра настроек
+	aptask.configApp = config.New()
+
+	// создание экземпляра команд
+	//aptask.listCommand = model.NewListCommand()
+}
+
+func (aptask *AppTask) Config() {
+
+	// загрузка настроек апп
+	err := aptask.configApp.Load(config.FileConfigName, &aptask.listCommand)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+}
+
+func (aptask *AppTask) Start() {
+
+	fmt.Println(aptask.listCommand)
 }
