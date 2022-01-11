@@ -5,5 +5,5 @@ const (
 	FolderBin       string = "\\bin\\"
 	FolderSeparator string = "\\"
 	FileConfigName  string = "config_command.json"
-	FileTasksName   string = "task.json"
+	FileTasksName   string = "tasks.json"
 )

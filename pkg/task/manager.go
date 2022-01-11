@@ -11,89 +11,103 @@ type ManagerTask interface {
 	// *****CRUD для задач*****
 
 	// создание задачи
-	Create(task model.Tasker)
+	Create(value string)
 	// чтение задачи
-	Read(value string) model.Tasker
+	Read(value string)
 	// обновление задачи
-	Update(value string, task model.Tasker) bool
+	Update()
 	// удаление задачи
-	Delete(value string) bool
+	Delete()
 }
 
-type Manager struct {
+type managerTsk struct {
 	listTask model.ListTask
+}
+
+func NewManagerTask() ManagerTask {
+	return &managerTsk{}
 }
 
 // ***** MANAGER *****
 
 // создание задачи
-func (mang *Manager) Create(task model.Tasker) {
+//func (mang *managerTsk) Create(task model.Task) {
+func (mang *managerTsk) Create(value string) {
 
-	mang.listTask = append(mang.listTask, task)
+	//mang.listTask = append(mang.listTask, &task)
 }
 
 // чтение задачи
-func (mang *Manager) Read(value string) model.Tasker {
+//func (mang *managerTsk) Read(value string) {
+func (mang *managerTsk) Read(value string) {
+	/*
+		// получаем
+		// id slice,
+		// task,
+		// bool - сущесвтует ли задача
+		_, atask, ok := mang.isTask(value)
+		if !ok {
+			fmt.Println("нет задачи.......... 0")
+			return
+		}
 
-	// получаем
-	// id slice,
-	// task,
-	// bool - сущесвтует ли задача
-	_, atask, ok := mang.isTask(value)
-	if !ok {
-		return nil
-	}
-	return atask
+		fmt.Println(atask.Name, "..........", atask.Progress)
+	*/
 }
 
 // обновление задачи
-func (mang *Manager) Update(value string, task model.Tasker) bool {
+//func (mang *managerTsk) Update(value string, task model.Task) bool {
+func (mang *managerTsk) Update() {
+	/*
 
-	if task == nil {
-		return false
-	}
+		if &task == nil {
+			return false
+		}
 
-	idx, atask, ok := mang.isTask(value)
-	if !ok {
-		return false
-	}
+		idx, atask, ok := mang.isTask(value)
+		if !ok {
+			return false
+		}
 
-	// обновление
-	mang.listTask[idx] = atask
+		// обновление
+		mang.listTask[idx] = &atask
 
-	return true
+		return true
+	*/
 }
 
 // удаление задачи
-func (mang *Manager) Delete(value string) bool {
+//func (mang *managerTsk) Delete(value string) bool {
+func (mang *managerTsk) Delete() {
+	/*
+		idx, _, ok := mang.isTask(value)
+		if !ok {
+			return false
+		}
 
-	idx, _, ok := mang.isTask(value)
-	if !ok {
-		return false
-	}
-
-	mang.remove(idx)
-	return true
+		mang.remove(idx)
+		return true
+	*/
 }
 
-func (mang *Manager) isTask(value string) (int, model.Tasker, bool) {
+func (mang *managerTsk) isTask(value string) (int, model.Task, bool) {
 
 	if len(mang.listTask) == 0 {
-		return -1, nil, false
+		return -1, model.Task{}, false
 	}
 
 	for idx, atsk := range mang.listTask {
 
-		ok := strings.Contains(atsk.Name(), value)
+		ok := strings.Contains(atsk.Name, value)
 		if ok {
-			return idx, atsk, true
+			return idx, *atsk, true
 		}
 	}
 
-	return -1, nil, false
+	return -1, model.Task{}, false
 }
 
-func (mang *Manager) remove(idx int) {
+func (mang *managerTsk) remove(idx int) {
 
 	newLisTask := append(mang.listTask[:idx], mang.listTask[idx+1:]...)
 	mang.listTask = newLisTask

@@ -1,13 +1,15 @@
 package application
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/Giovanny472/gtask/model"
+	"github.com/Giovanny472/gtask/pkg/command"
 	"github.com/Giovanny472/gtask/pkg/config"
+	"github.com/Giovanny472/gtask/pkg/task"
 )
 
+// интерфайс для управление апп
 type AppTasker interface {
 	Config()
 	Start()
@@ -15,8 +17,18 @@ type AppTasker interface {
 
 // управление апп
 type AppTask struct {
-	configApp   config.Configurator
-	listCommand model.ListCommand
+
+	// список commands. загрузка данных через json
+	listCommand *model.ListCommand
+	// список task. загрузка данных через json
+	listTsk *model.ListTask
+
+	// для настройки App
+	configApp config.Configurator
+	// управление task
+	manTask task.ManagerTask
+	// управление Parser command
+	manCommand command.ManagerCommand
 }
 
 var apptask *AppTask
@@ -41,20 +53,40 @@ func (aptask *AppTask) init() {
 	aptask.configApp = config.New()
 
 	// создание экземпляра команд
-	//aptask.listCommand = model.NewListCommand()
+	aptask.listCommand = model.NewListCommand()
+
+	// Manager Task
+	aptask.manTask = task.NewManagerTask()
+
+	// Manager Command
+	aptask.manCommand = command.NewManagerCommand()
 }
 
 func (aptask *AppTask) Config() {
 
-	// загрузка настроек апп
+	// загрузка commands апп
 	err := aptask.configApp.Load(config.FileConfigName, &aptask.listCommand)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// загрузка task
+	err = apptask.configApp.Load(config.FileTasksName, &aptask.listTsk)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func (aptask *AppTask) Start() {
 
-	fmt.Println(aptask.listCommand)
+	// загрузка комманды
+
+	aptask.manCommand.Load(aptask.listCommand)
+
+	// Parse комманды
+	aptask.manCommand.Parse()
+
+	// запуск
+	aptask.manCommand.Execute(aptask.manTask, aptask.listCommand)
+
 }

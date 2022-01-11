@@ -3,28 +3,30 @@
      "name": "add",
      "instruction": "a",
      "valuedefault":"",
-     "valueUsr":"",
      "description": "создание задачи"
     },
     {
      "name": "update",
      "instruction": "u",
      "valuedefault":"",
-     "valueUsr":"",
      "description": "обновление задачи"
     },
     {
      "name": "delete",
      "instruction": "d",
      "valuedefault":"",
-     "valueUsr":"",
      "description": "удаление задачи"
     },
     {
      "name": "read",
      "instruction": "r",
      "valuedefault":"",
-     "valueUsr":"",
      "description": "чтение задачи"
+    },
+    {
+     "name": "progress",
+     "instruction": "p",
+     "valuedefault":"",
+     "description": "прогресс задачи"
     }
 ]
