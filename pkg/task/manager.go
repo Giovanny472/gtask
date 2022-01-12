@@ -2,6 +2,7 @@ package task
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/Giovanny472/gtask/model"
@@ -17,7 +18,7 @@ type ManagerTask interface {
 	// создание задачи
 	Create(value string)
 	// чтение задачи
-	Read()
+	Read(value string)
 	// обновление задачи
 	Update(value string)
 	// удаление задачи
@@ -28,8 +29,7 @@ type ManagerTask interface {
 }
 
 type managerTsk struct {
-	listTask         *model.ListTask
-	listChangedTasks model.ListTask
+	listTask *model.ListTask
 }
 
 func NewManagerTask() ManagerTask {
@@ -48,52 +48,86 @@ func (mang *managerTsk) Init(lstTsk *model.ListTask) {
 // создание задачи
 func (mang *managerTsk) Create(value string) {
 
-	var atsk model.Task
-	atsk.Name = "demo03"
-	atsk.Progress = 80
+	alistparams := strings.Split(value, ",")
+	if len(alistparams) < 2 {
+		return
+	}
 
-	//mang.listTask
-	mang.listChangedTasks = append(*mang.listTask, &atsk)
+	// получаем новые значения
+	aNamNew := alistparams[0]
+	aProNew, isOkProg := strconv.Atoi(alistparams[1])
+	if isOkProg != nil {
+		return
+	}
+
+	var atsk model.Task
+	atsk.Name = aNamNew
+	atsk.Progress = aProNew
+
+	// новый список
+	//var listChangedTasks model.ListTask
+	listChangedTasks := append(*mang.listTask, &atsk)
 
 	// обновление списка задач
-	mang.listTask = &mang.listChangedTasks
+	mang.listTask = &listChangedTasks
 
 	fmt.Println("CREATE")
 }
 
 // чтение задачи
-func (mang *managerTsk) Read() {
-	// без изменения данных
-	// поэтому без реализация метода
+func (mang *managerTsk) Read(value string) {
+
+	if len(value) == 0 {
+		return
+	}
+
+	if value == "all" {
+		return
+	}
+
 }
 
 // обновление задачи
 func (mang *managerTsk) Update(value string) {
 
-	atask, ok := mang.isTask(value)
+	alistparams := strings.Split(value, ",")
+	if len(alistparams) < 3 {
+		return
+	}
+
+	// получаем название задачи
+	aName := alistparams[0]
+
+	// получаем новые значения
+	aNamNew := alistparams[1]
+	aProNew, isOkProg := strconv.Atoi(alistparams[2])
+
+	// найдем задачу из списка
+	atask, ok := mang.isTask(aName)
 	if !ok {
 		return
 	}
 
 	// обновление
+	atask.Name = aNamNew
 
-	atask.Name = "nonono"
-	atask.Progress = 101010
+	if isOkProg == nil {
+		atask.Progress = aProNew
+	}
 
 	fmt.Println("UPDATE")
 }
 
 // удаление задачи
 func (mang *managerTsk) Delete(value string) {
-	/*
-		idx, _, ok := mang.isTask(value)
-		if !ok {
-			return false
-		}
 
-		mang.remove(idx)
-		return true
-	*/
+	atask, ok := mang.isTask(value)
+	if !ok {
+		return
+	}
+
+	mang.remove(atask)
+
 }
 
 // существует ли задача
@@ -115,11 +149,22 @@ func (mang *managerTsk) isTask(value string) (*model.Task, bool) {
 }
 
 // удаление задачи
-func (mang *managerTsk) remove(idx int) {
-	/*
-		newLisTask := append(mang.listTask[:idx], mang.listTask[idx+1:]...)
-		mang.listTask = newLisTask
-	*/
+func (mang *managerTsk) remove(atsk *model.Task) {
+
+	// новый список
+	var listChangedTasks model.ListTask
+	for _, avalTask := range *mang.listTask {
+
+		if avalTask == atsk {
+			continue
+		}
+
+		listChangedTasks = append(listChangedTasks, avalTask)
+
+	}
+
+	mang.listTask = &listChangedTasks
+
 }
 
 func (mang *managerTsk) GetListTasks() *model.ListTask {

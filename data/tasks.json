@@ -6,5 +6,9 @@
  {
   "name": "demo02",
   "progress": 40
+ },
+ {
+  "name": "demo03",
+  "progress": 60
  }
 ]

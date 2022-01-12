@@ -81,7 +81,7 @@ func (mang *managerCom) executeProcess(nametask string, valuetask string) {
 
 	case model.CommandRea:
 		fmt.Println("command read")
-		mang.manTask.Read()
+		mang.manTask.Read(valuetask)
 	}
 
 }
