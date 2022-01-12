@@ -5,7 +5,6 @@ const (
 	CommandUpd string = "update"
 	CommandDel string = "delete"
 	CommandRea string = "read"
-	CommandPro string = "progress"
 )
 
 // Реализация  интерфейса

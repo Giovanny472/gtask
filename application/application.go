@@ -1,6 +1,7 @@
 package application
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/Giovanny472/gtask/model"
@@ -79,14 +80,29 @@ func (aptask *AppTask) Config() {
 
 func (aptask *AppTask) Start() {
 
-	// загрузка комманды
+	// инициализация Manager Command
+	aptask.manTask.Init(aptask.listTsk)
 
-	aptask.manCommand.Load(aptask.listCommand)
+	// инициализация Manager Command
+	aptask.manCommand.Init(aptask.listCommand, aptask.manTask)
+
+	// загрузка комманды
+	aptask.manCommand.Load()
 
 	// Parse комманды
 	aptask.manCommand.Parse()
 
-	// запуск
-	aptask.manCommand.Execute(aptask.manTask, aptask.listCommand)
+	// запуск изменений
+	aptask.manCommand.Execute()
+
+	// запуск изменений
+	//aptask.manCommand.ShowTasksTerminal(*aptask.manTask.GetListTasks())
+
+	// сохранение изменений задач
+	aptask.configApp.Save(config.FileTasksName, *aptask.manTask.GetListTasks())
+
+	for _, valuer := range *aptask.manTask.GetListTasks() {
+		fmt.Println(valuer)
+	}
 
 }

@@ -1,6 +1,7 @@
 package task
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/Giovanny472/gtask/model"
@@ -10,18 +11,25 @@ type ManagerTask interface {
 
 	// *****CRUD для задач*****
 
+	// инициализация
+	Init(lstTsk *model.ListTask)
+
 	// создание задачи
 	Create(value string)
 	// чтение задачи
-	Read(value string)
+	Read()
 	// обновление задачи
-	Update()
+	Update(value string)
 	// удаление задачи
-	Delete()
+	Delete(value string)
+
+	// список задач
+	GetListTasks() *model.ListTask
 }
 
 type managerTsk struct {
-	listTask model.ListTask
+	listTask         *model.ListTask
+	listChangedTasks model.ListTask
 }
 
 func NewManagerTask() ManagerTask {
@@ -30,55 +38,53 @@ func NewManagerTask() ManagerTask {
 
 // ***** MANAGER *****
 
+// инициализация
+func (mang *managerTsk) Init(lstTsk *model.ListTask) {
+
+	// список tasks
+	mang.listTask = lstTsk
+}
+
 // создание задачи
-//func (mang *managerTsk) Create(task model.Task) {
 func (mang *managerTsk) Create(value string) {
 
-	//mang.listTask = append(mang.listTask, &task)
+	var atsk model.Task
+	atsk.Name = "demo03"
+	atsk.Progress = 80
+
+	//mang.listTask
+	mang.listChangedTasks = append(*mang.listTask, &atsk)
+
+	// обновление списка задач
+	mang.listTask = &mang.listChangedTasks
+
+	fmt.Println("CREATE")
 }
 
 // чтение задачи
-//func (mang *managerTsk) Read(value string) {
-func (mang *managerTsk) Read(value string) {
-	/*
-		// получаем
-		// id slice,
-		// task,
-		// bool - сущесвтует ли задача
-		_, atask, ok := mang.isTask(value)
-		if !ok {
-			fmt.Println("нет задачи.......... 0")
-			return
-		}
-
-		fmt.Println(atask.Name, "..........", atask.Progress)
-	*/
+func (mang *managerTsk) Read() {
+	// без изменения данных
+	// поэтому без реализация метода
 }
 
 // обновление задачи
-//func (mang *managerTsk) Update(value string, task model.Task) bool {
-func (mang *managerTsk) Update() {
-	/*
+func (mang *managerTsk) Update(value string) {
 
-		if &task == nil {
-			return false
-		}
+	atask, ok := mang.isTask(value)
+	if !ok {
+		return
+	}
 
-		idx, atask, ok := mang.isTask(value)
-		if !ok {
-			return false
-		}
+	// обновление
 
-		// обновление
-		mang.listTask[idx] = &atask
+	atask.Name = "nonono"
+	atask.Progress = 101010
 
-		return true
-	*/
+	fmt.Println("UPDATE")
 }
 
 // удаление задачи
-//func (mang *managerTsk) Delete(value string) bool {
-func (mang *managerTsk) Delete() {
+func (mang *managerTsk) Delete(value string) {
 	/*
 		idx, _, ok := mang.isTask(value)
 		if !ok {
@@ -90,25 +96,32 @@ func (mang *managerTsk) Delete() {
 	*/
 }
 
-func (mang *managerTsk) isTask(value string) (int, model.Task, bool) {
+// существует ли задача
+func (mang *managerTsk) isTask(value string) (*model.Task, bool) {
 
-	if len(mang.listTask) == 0 {
-		return -1, model.Task{}, false
+	if len(*mang.listTask) == 0 {
+		return &model.Task{}, false
 	}
 
-	for idx, atsk := range mang.listTask {
+	for _, atsk := range *mang.listTask {
 
 		ok := strings.Contains(atsk.Name, value)
 		if ok {
-			return idx, *atsk, true
+			return atsk, true
 		}
 	}
 
-	return -1, model.Task{}, false
+	return &model.Task{}, false
 }
 
+// удаление задачи
 func (mang *managerTsk) remove(idx int) {
+	/*
+		newLisTask := append(mang.listTask[:idx], mang.listTask[idx+1:]...)
+		mang.listTask = newLisTask
+	*/
+}
 
-	newLisTask := append(mang.listTask[:idx], mang.listTask[idx+1:]...)
-	mang.listTask = newLisTask
+func (mang *managerTsk) GetListTasks() *model.ListTask {
+	return mang.listTask
 }
