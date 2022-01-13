@@ -1,13 +1,13 @@
 package application
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/Giovanny472/gtask/model"
 	"github.com/Giovanny472/gtask/pkg/command"
 	"github.com/Giovanny472/gtask/pkg/config"
 	"github.com/Giovanny472/gtask/pkg/task"
+	"github.com/Giovanny472/gtask/pkg/ui"
 )
 
 // интерфайс для управление апп
@@ -30,6 +30,8 @@ type AppTask struct {
 	manTask task.ManagerTask
 	// управление Parser command
 	manCommand command.ManagerCommand
+	// ui
+	uiTerminal model.Shower
 }
 
 var apptask *AppTask
@@ -61,6 +63,9 @@ func (aptask *AppTask) init() {
 
 	// Manager Command
 	aptask.manCommand = command.NewManagerCommand()
+
+	// ui
+	aptask.uiTerminal = ui.NewUITerminal()
 }
 
 func (aptask *AppTask) Config() {
@@ -76,9 +81,6 @@ func (aptask *AppTask) Config() {
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func (aptask *AppTask) Start() {
 
 	// инициализация Manager Command
 	aptask.manTask.Init(aptask.listTsk)
@@ -91,18 +93,16 @@ func (aptask *AppTask) Start() {
 
 	// Parse комманды
 	aptask.manCommand.Parse()
+}
+
+func (aptask *AppTask) Start() {
 
 	// запуск изменений
 	aptask.manCommand.Execute()
 
-	// запуск изменений
-	//aptask.manCommand.ShowTasksTerminal(*aptask.manTask.GetListTasks())
-
 	// сохранение изменений задач
 	aptask.configApp.Save(config.FileTasksName, *aptask.manTask.GetListTasks())
 
-	for _, valuer := range *aptask.manTask.GetListTasks() {
-		fmt.Println(valuer)
-	}
-
+	// ui show
+	aptask.uiTerminal.Show(aptask.manTask.GetListTasks())
 }

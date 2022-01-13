@@ -1,7 +1,6 @@
 package task
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 
@@ -71,7 +70,6 @@ func (mang *managerTsk) Create(value string) {
 	// обновление списка задач
 	mang.listTask = &listChangedTasks
 
-	fmt.Println("CREATE")
 }
 
 // чтение задачи
@@ -84,7 +82,6 @@ func (mang *managerTsk) Read(value string) {
 	if value == "all" {
 		return
 	}
-
 }
 
 // обновление задачи
@@ -115,7 +112,6 @@ func (mang *managerTsk) Update(value string) {
 		atask.Progress = aProNew
 	}
 
-	fmt.Println("UPDATE")
 }
 
 // удаление задачи
@@ -127,7 +123,6 @@ func (mang *managerTsk) Delete(value string) {
 	}
 
 	mang.remove(atask)
-
 }
 
 // существует ли задача
@@ -158,11 +153,8 @@ func (mang *managerTsk) remove(atsk *model.Task) {
 		if avalTask == atsk {
 			continue
 		}
-
 		listChangedTasks = append(listChangedTasks, avalTask)
-
 	}
-
 	mang.listTask = &listChangedTasks
 
 }

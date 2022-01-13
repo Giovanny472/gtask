@@ -2,7 +2,6 @@ package command
 
 import (
 	"flag"
-	"fmt"
 
 	"github.com/Giovanny472/gtask/model"
 	"github.com/Giovanny472/gtask/pkg/task"
@@ -67,20 +66,16 @@ func (mang *managerCom) executeProcess(nametask string, valuetask string) {
 
 	// создание
 	case model.CommandAdd:
-		fmt.Println("command add")
 		mang.manTask.Create(valuetask)
 
 	// обновление
 	case model.CommandUpd:
-		fmt.Println("command update")
 		mang.manTask.Update(valuetask)
 
 	case model.CommandDel:
-		fmt.Println("command delete")
 		mang.manTask.Delete(valuetask)
 
 	case model.CommandRea:
-		fmt.Println("command read")
 		mang.manTask.Read(valuetask)
 	}
 
