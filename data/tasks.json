@@ -1,22 +1,19 @@
 [
  {
-  "name": "проект-задачи",
-  "progress": 95
+  "name": "demo01",
+  "progress": 20
  },
  {
-  "name": "аппЗадачи_добавить_Parser",
-  "progress": 0
+  "name": "demo02",
+  "progress": 40
  },
  {
-  "name": "аппЗадачи--добавить_пробел",
-  "progress": 0
+  "name": "demo03",
+  "progress": 60
  },
  {
-  "name": "аппЗадачи--добавить_цвет",
-  "progress": 0
- },
- {
-  "name": "проект_qrкод_начать",
-  "progress": 0
+  "name": "demo04",
+  "progress": 80
  }
+
 ]
