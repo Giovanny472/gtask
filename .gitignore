@@ -12,3 +12,6 @@
 # каталоги 
 /bin/
 .vscode
+
+# пример задач
+./data/tasks.json
