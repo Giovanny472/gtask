@@ -5,9 +5,12 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"unicode/utf8"
 
 	"github.com/Giovanny472/gtask/model"
 )
+
+const lenRow int = 40
 
 type uiterminal struct {
 }
@@ -20,9 +23,9 @@ func (uiterm *uiterminal) Show(listask *model.ListTask) {
 
 	uiterm.clearTerminal()
 
-	fmt.Println(model.Cyan, "********************************")
-	fmt.Println(model.Cyan, "*      З А Д А Ч И             *")
-	fmt.Println(model.Cyan, "********************************")
+	fmt.Println(model.Cyan, "**************************************************")
+	fmt.Println(model.Cyan, "*           С П И С О К  -  З А Д А Ч            *")
+	fmt.Println(model.Cyan, "**************************************************")
 
 	//   список задачи
 	var acolor model.Color
@@ -47,7 +50,14 @@ func (uiterm *uiterminal) Show(listask *model.ListTask) {
 
 		// название задачи
 		fmt.Print(model.Cyan, value.Name)
-		fmt.Print(model.Cyan, " ..... ")
+
+		// ...
+		aLenTask := utf8.RuneCountInString(value.Name)
+		fmt.Print(aLenTask)
+
+		for aInc := aLenTask; aInc < lenRow; aInc++ {
+			fmt.Print(model.Cyan, ".")
+		}
 
 		fmt.Println(acolor, value.Progress, "%")
 		fmt.Print(model.ColorReset)
