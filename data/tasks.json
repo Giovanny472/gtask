@@ -1,18 +1,18 @@
 [
  {
-  "name": "demo01",
+  "name": "demo01 ",
   "progress": 0
  },
  {
-  "name": "demo02",
-  "progress": 40
+  "name": "demo02 ",
+  "progress": 0
  },
  {
-  "name": "demo03",
-  "progress": 60
+  "name": "demo03 ",
+  "progress": 0
  },
  {
-  "name": "demo04",
-  "progress": 80
+  "name": "demo04 ",
+  "progress": 0
  }
 ]

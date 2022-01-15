@@ -51,12 +51,21 @@ func (mang *managerTsk) Create(value string, params []string) {
 
 	// получаем новые значения
 	// [1] название задачи
-	atsk.Name = value
+	atsk.Name = value + " "
 	// [2] процент
 	if len(params) > 0 {
-		aprog, err := strconv.Atoi(params[0])
-		if err == nil {
-			atsk.Progress = aprog
+
+		for idx := 0; idx < len(params); idx++ {
+
+			// [2] прогресс задачи
+			aval, err := strconv.Atoi(params[idx])
+			if err == nil {
+				atsk.Progress = aval
+				continue
+			}
+
+			// [1] название задачи
+			atsk.Name += params[idx] + " "
 		}
 	}
 
@@ -110,7 +119,7 @@ func (mang *managerTsk) Update(value string, params []string) {
 		}
 
 		// [1] название задачи
-		aName = params[idx]
+		aName += params[idx] + " "
 	}
 
 	// найдем задачу из списка
