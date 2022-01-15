@@ -15,7 +15,7 @@ type ManagerTask interface {
 	Init(lstTsk *model.ListTask)
 
 	// создание задачи
-	Create(value string)
+	Create(value string, params []string)
 	// чтение задачи
 	Read(value string)
 	// обновление задачи
@@ -45,30 +45,32 @@ func (mang *managerTsk) Init(lstTsk *model.ListTask) {
 }
 
 // создание задачи
-func (mang *managerTsk) Create(value string) {
-
-	alistparams := strings.Split(value, ",")
-	if len(alistparams) < 2 {
-		return
-	}
-
-	// получаем новые значения
-	aNamNew := alistparams[0]
-	aProNew, isOkProg := strconv.Atoi(alistparams[1])
-	if isOkProg != nil {
-		return
-	}
+func (mang *managerTsk) Create(value string, params []string) {
 
 	var atsk model.Task
-	atsk.Name = aNamNew
-	atsk.Progress = aProNew
 
-	// новый список
-	//var listChangedTasks model.ListTask
-	listChangedTasks := append(*mang.listTask, &atsk)
+	// получаем новые значения
+	// [1] название задачи
+	atsk.Name = value
+	// [2] процент
+	if len(params) > 0 {
+		aprog, err := strconv.Atoi(params[0])
+		if err == nil {
+			atsk.Progress = aprog
+		}
+	}
 
-	// обновление списка задач
-	mang.listTask = &listChangedTasks
+	// проверка задачи
+	_, ok := mang.isTask(atsk.Name)
+	if !ok {
+
+		// новый список
+		//var listChangedTasks model.ListTask
+		listChangedTasks := append(*mang.listTask, &atsk)
+
+		// обновление списка задач
+		mang.listTask = &listChangedTasks
+	}
 
 }
 

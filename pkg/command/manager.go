@@ -66,7 +66,7 @@ func (mang *managerCom) executeProcess(nametask string, valuetask string) {
 
 	// создание
 	case model.CommandAdd:
-		mang.manTask.Create(valuetask)
+		mang.manTask.Create(valuetask, flag.Args())
 
 	// обновление
 	case model.CommandUpd:

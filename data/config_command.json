@@ -1,7 +1,7 @@
 [
     {
      "name": "add",
-     "instruction": "a",
+     "instruction": "add",
      "valuedefault":"",
      "description": "создание задачи"
     },
@@ -13,7 +13,7 @@
     },
     {
      "name": "delete",
-     "instruction": "d",
+     "instruction": "del",
      "valuedefault":"",
      "description": "удаление задачи"
     },
