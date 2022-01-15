@@ -70,7 +70,7 @@ func (mang *managerCom) executeProcess(nametask string, valuetask string) {
 
 	// обновление
 	case model.CommandUpd:
-		mang.manTask.Update(valuetask)
+		mang.manTask.Update(valuetask, flag.Args())
 
 	case model.CommandDel:
 		mang.manTask.Delete(valuetask)

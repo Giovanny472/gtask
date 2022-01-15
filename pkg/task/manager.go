@@ -19,7 +19,7 @@ type ManagerTask interface {
 	// чтение задачи
 	Read(value string)
 	// обновление задачи
-	Update(value string)
+	Update(value string, params []string)
 	// удаление задачи
 	Delete(value string)
 
@@ -87,31 +87,44 @@ func (mang *managerTsk) Read(value string) {
 }
 
 // обновление задачи
-func (mang *managerTsk) Update(value string) {
+func (mang *managerTsk) Update(value string, params []string) {
 
-	alistparams := strings.Split(value, ",")
-	if len(alistparams) < 3 {
+	// получаем название задачи
+	aTaskName := value
+
+	// проверка параметров
+	if len(params) == 0 {
 		return
 	}
 
-	// получаем название задачи
-	aName := alistparams[0]
+	// получаем параметры
+	var aName string
+	var aProg int = -1
+	for idx := 0; idx < len(params); idx++ {
 
-	// получаем новые значения
-	aNamNew := alistparams[1]
-	aProNew, isOkProg := strconv.Atoi(alistparams[2])
+		// [2] прогресс задачи
+		aval, err := strconv.Atoi(params[idx])
+		if err == nil {
+			aProg = aval
+			continue
+		}
+
+		// [1] название задачи
+		aName = params[idx]
+	}
 
 	// найдем задачу из списка
-	atask, ok := mang.isTask(aName)
+	atask, ok := mang.isTask(aTaskName)
 	if !ok {
 		return
 	}
 
 	// обновление
-	atask.Name = aNamNew
-
-	if isOkProg == nil {
-		atask.Progress = aProNew
+	if len(aName) > 0 {
+		atask.Name = aName
+	}
+	if aProg != -1 {
+		atask.Progress = aProg
 	}
 
 }

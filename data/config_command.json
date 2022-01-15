@@ -7,7 +7,7 @@
     },
     {
      "name": "update",
-     "instruction": "u",
+     "instruction": "update",
      "valuedefault":"",
      "description": "обновление задачи"
     },
@@ -22,11 +22,5 @@
      "instruction": "r",
      "valuedefault":"",
      "description": "чтение задачи"
-    },
-    {
-     "name": "progress",
-     "instruction": "p",
-     "valuedefault":"",
-     "description": "прогресс задачи"
     }
 ]
