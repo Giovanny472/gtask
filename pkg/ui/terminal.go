@@ -53,7 +53,6 @@ func (uiterm *uiterminal) Show(listask *model.ListTask) {
 
 		// ...
 		aLenTask := utf8.RuneCountInString(value.Name)
-		fmt.Print(aLenTask)
 
 		for aInc := aLenTask; aInc < lenRow; aInc++ {
 			fmt.Print(model.Cyan, ".")
