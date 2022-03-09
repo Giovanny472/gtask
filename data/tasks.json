@@ -1,18 +1,18 @@
 [
  {
-  "name": "demo01 ",
-  "progress": 0
+  "name": "Состав контракта ",
+  "progress": 100
  },
  {
-  "name": "demo02 ",
-  "progress": 0
+  "name": "Дрова ",
+  "progress": 100
  },
  {
-  "name": "demo03 ",
-  "progress": 0
+  "name": "контракт. добавление live ",
+  "progress": 100
  },
  {
-  "name": "demo04 ",
-  "progress": 0
+  "name": "исправление ошибок.дроваточка. выделение ",
+  "progress": 100
  }
 ]

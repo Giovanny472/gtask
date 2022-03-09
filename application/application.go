@@ -3,11 +3,11 @@ package application
 import (
 	"log"
 
+	"github.com/Giovanny472/gtask/internal/command"
+	"github.com/Giovanny472/gtask/internal/config"
+	"github.com/Giovanny472/gtask/internal/task"
+	"github.com/Giovanny472/gtask/internal/ui"
 	"github.com/Giovanny472/gtask/model"
-	"github.com/Giovanny472/gtask/pkg/command"
-	"github.com/Giovanny472/gtask/pkg/config"
-	"github.com/Giovanny472/gtask/pkg/task"
-	"github.com/Giovanny472/gtask/pkg/ui"
 )
 
 // интерфайс для управление апп

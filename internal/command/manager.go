@@ -3,8 +3,8 @@ package command
 import (
 	"flag"
 
+	"github.com/Giovanny472/gtask/internal/task"
 	"github.com/Giovanny472/gtask/model"
-	"github.com/Giovanny472/gtask/pkg/task"
 )
 
 // управление коммандами
