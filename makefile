@@ -10,3 +10,10 @@ build-gtask-web:
 
 run-gtask-web: build-gtask-web
 	@.\bin\gtask-web.exe 	
+
+build-gtask-desktop:
+	@go build -o bin\gtask-desktop.exe .\cmdterminal\main.go
+
+run-gtask-desktop: build-gtask-desktop
+	@cd .\bin
+	@gtask.exe 

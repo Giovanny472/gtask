@@ -10,8 +10,8 @@
 *.tmp
 
 # каталоги 
-/bin/
 .vscode
+bin/
 
 # пример задач
-./data/tasks.json
+data/tasks.json
