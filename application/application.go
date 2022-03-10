@@ -10,7 +10,7 @@ import (
 	"github.com/Giovanny472/gtask/model"
 )
 
-// интерфайс для управление апп
+// интерфейс для управления апп
 type AppTasker interface {
 	Config()
 	Start()
