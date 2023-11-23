@@ -36,7 +36,7 @@ type AppTask struct {
 
 var apptask *AppTask
 
-func New() AppTasker {
+func NewApp() AppTasker {
 
 	if apptask == nil {
 

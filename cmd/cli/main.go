@@ -5,7 +5,7 @@ import "github.com/Giovanny472/gtask/application"
 func main() {
 
 	// создание апп
-	aTaskApp := application.New()
+	aTaskApp := application.NewApp()
 
 	// настройка апп
 	aTaskApp.Config()

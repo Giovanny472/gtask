@@ -16,7 +16,7 @@ type Command struct {
 	Description  string `json:"description"`  // описание команды
 }
 
-type ListCommand []*Command
+type ListCommand []Command
 
 func NewListCommand() *ListCommand {
 	return new(ListCommand)
