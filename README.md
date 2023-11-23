@@ -1,7 +1,7 @@
 # gtask
 
 
-| [ру](https://github.com/Giovanny472/gtask/README.md) | [es](https://github.com/Giovanny472/gtask/README.es.md) |
+| [ру](https://github.com/Giovanny472/gtask) | [es](https://github.com/Giovanny472/gtask/blob/main/README.es.md) |
 
 
 cli-программа для управления задачами.
