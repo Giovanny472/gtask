@@ -1,18 +1,20 @@
+
 # gtask
 
 
 | [ру](https://github.com/Giovanny472/gtask/README.md) | [es](https://github.com/Giovanny472/gtask/README.es.md) |
 
 
-cli-программа для управления задачами.
 
-Компилировать программу:
+cli-programa para la administracion de tareas.
+
+Para compilar el programa:
 
 ```go
   make build-gtask-cli
 ```
 
-Запускать программу:
+Para ejecutar el programa:
 
 ```golang
     make run-gtask-cli 
